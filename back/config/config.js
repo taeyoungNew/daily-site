@@ -1,10 +1,11 @@
 require("dotenv").config();
+const env = process.env;
 
 const development = {
-  username: process.env.MYSQL_USERNAME,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE,
-  host: process.env.MYSQL_HOST,
+  username: env.DB_USERNAME,
+  password: env.DB_PASSWORD,
+  database: env.DB_DATABASE,
+  host: env.DB_HOST,
   dialect: "mysql",
 };
 
@@ -24,4 +25,8 @@ const production = {
   dialect: "mysql",
 };
 
-module.exports = { development, test, production };
+module.exports = {
+  development,
+  test,
+  production,
+};

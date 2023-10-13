@@ -25,11 +25,20 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
       },
-      name: { type: DataTypes.STRING(10) },
-      hobby: { type: DataTypes.STRING(20) },
-      address: { type: DataTypes.STRING(30) },
+      profileImg: {
+        type: DataTypes.STRING,
+      },
+      name: {
+        type: DataTypes.STRING(10),
+      },
+      hobby: {
+        type: DataTypes.STRING(20),
+      },
+      address: {
+        type: DataTypes.STRING(30),
+      },
       mbti: {
         type: DataTypes.ENUM(
           "ISTJ",
