@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Post extends Model {
+  class Chat extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,25 +9,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // user - post 1대다
       this.belongsTo(models.Users, {
-        targetKey: "id",
-        foreignKey: "userId",
+        foreignKey: "userOneId",
       });
-      // post - comment 1대다
-      this.hasMany(models.Comment, {
-        sourceKey: "id",
-        foreignKey: "postId",
+      this.belongsTo(models.Users, {
+        foreignKey: "userTwoId",
       });
-      // post - like 다대다
-      this.belongsToMany(models.Users, {
-        through: "Like",
+      this.hasMany(models.ChatContent, {
         sourceKey: "id",
-        foreignKey: "postId",
+        foreignKey: "ChatId",
       });
     }
   }
-  Post.init(
+  Chat.init(
     {
       id: {
         allowNull: false,
@@ -35,15 +29,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      userId: {
-        allowNull: false,
-        type: DataTypes.INTEGER,
-      },
-      content: {
-        allowNull: false,
-        type: DataTypes.STRING(400),
-      },
-      image: { type: DataTypes.STRING },
+      // userOneId: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      //   references: {
+      //     model: "User",
+      //     key: "id",
+      //   },
+      // },
+      // userTwoId: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      //   references: {
+      //     model: "User",
+      //     key: "id",
+      //   },
+      // },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
@@ -57,8 +58,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Post",
+      modelName: "Chat",
     }
   );
-  return Post;
+  return Chat;
 };

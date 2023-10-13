@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class UserInfo extends Model {
+  class ChatContent extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,13 +9,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.UserInfo, {
+      this.belongsTo(models.Chat, {
         targetKey: "id",
-        foreignKey: "userId",
+        foreignKey: "ChatId",
       });
     }
   }
-  UserInfo.init(
+  ChatContent.init(
     {
       id: {
         allowNull: false,
@@ -23,38 +23,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      userId: {
-        allowNull: false,
+      ChatId: {
         type: DataTypes.INTEGER,
+        allowNull: false,
       },
-      name: { type: DataTypes.STRING(10) },
-      hobby: { type: DataTypes.STRING(20) },
-      address: { type: DataTypes.STRING(30) },
-      mbti: {
-        type: DataTypes.ENUM(
-          "ISTJ",
-          "ISFJ",
-          "INFJ",
-          "INTJ",
-          "ISTP",
-          "ISFP",
-          "INFP",
-          "INTP",
-          "ESTP",
-          "ESFP",
-          "ENFP",
-          "ENTP",
-          "ESTJ",
-          "ESFJ",
-          "ENFJ",
-          "ENTJ"
-        ),
+      senderId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
-      food: { type: DataTypes.STRING(30) },
-      age: {
-        type: DataTypes.INTEGER(100),
+      ChatContent: {
+        type: DataTypes.STRING,
       },
-      aboutMe: { type: DataTypes.STRING(255) },
+      isCheck: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
@@ -68,8 +52,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "UserInfo",
+      modelName: "ChatContent",
     }
   );
-  return UserInfo;
+  return ChatContent;
 };
