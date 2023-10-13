@@ -11,7 +11,10 @@ module.exports = {
       },
       userId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+      },
+      profileImg: {
+        type: Sequelize.STRING,
       },
       name: {
         allowNull: false,
