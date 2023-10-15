@@ -23,8 +23,9 @@ class UserController {
         aboutMe,
       } = req.body;
       // 회원가입 확인검증
-      const isEmail = await this.findEmail(email);
-      if (isEmail) {
+      const isUser = await this.userService.findUser(email);
+      console.log(isUser);
+      if (isUser) {
         return res.status(401).send({ message: "이미 존재하는 회원입니다." });
       }
       // 이메일형식검증
@@ -74,8 +75,8 @@ class UserController {
     const id = res.locals.user;
     const { email } = res.body;
     // 있는 회원인지 조회
-    const isEmail = this.findEmail(email);
-    if (!isEmail) {
+    const isUser = this.findUser(email);
+    if (!isUser) {
       return res
         .status(401)
         .send({ message: "이미 존재하지 않는 회원입니다." });
@@ -83,8 +84,8 @@ class UserController {
     await this.userService.withdrawal(id);
   };
 
-  findEmail = async (email) => {
-    const result = await this.userService.findEmail(email);
+  findUser = async (email) => {
+    const result = await this.userService.findUser(email);
     return result;
   };
 }

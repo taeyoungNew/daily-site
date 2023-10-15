@@ -11,12 +11,18 @@ module.exports = {
       },
       email: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         unique: true,
       },
       password: {
         allowNull: false,
+        type: Sequelize.STRING(30),
+      },
+      crrRefToken: {
         type: Sequelize.STRING,
+      },
+      crrRefTokenExp: {
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,

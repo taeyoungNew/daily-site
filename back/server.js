@@ -9,9 +9,9 @@ const app = express();
 const http = Server(app);
 const HOST = "127.0.0.1";
 
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api", router);
-app.use(cookieParser());
 
 http.listen(PORT, HOST, () => {
   console.log(`${PORT}포트에 접속하였습니다.`);

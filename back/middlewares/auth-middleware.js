@@ -27,15 +27,15 @@ module.exports = async (req, res, next) => {
 
           switch (err.name) {
             case "TokenExpiredError":
-              //? token이 만료됨.
-              return res
-                .status(403)
-                .json({ errMsg: "시간이 만료되어 로그아웃되었습니다." });
+              //? access token이 만료되면
+              return res.status(403).send({
+                TokenExpiredError: "시간이 만료되어 로그아웃되었습니다.",
+              });
             default:
               //? token decoded 에러
               return res
                 .status(400)
-                .json(`invalid token. error name: ${err.name}`);
+                .send(`invalid token. error name: ${err.name}`);
           }
         }
         return decoded;
