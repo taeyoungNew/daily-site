@@ -18,23 +18,36 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(10),
       },
       hobby: {
-        type: Sequelize.STRING,
-        defaultValue: "미등록",
+        type: Sequelize.STRING(20),
       },
       address: {
-        type: Sequelize.STRING,
-        defaultValue: "미등록",
+        type: Sequelize.STRING(30),
       },
       mbti: {
-        type: Sequelize.STRING,
-        defaultValue: "미등록",
+        type: Sequelize.ENUM(
+          "ISTJ",
+          "ISFJ",
+          "INFJ",
+          "INTJ",
+          "ISTP",
+          "ISFP",
+          "INFP",
+          "INTP",
+          "ESTP",
+          "ESFP",
+          "ENFP",
+          "ENTP",
+          "ESTJ",
+          "ESFJ",
+          "ENFJ",
+          "ENTJ"
+        ),
       },
       food: {
         type: Sequelize.STRING,
-        defaultValue: "미등록",
       },
       age: {
         type: Sequelize.INTEGER,
@@ -42,7 +55,6 @@ module.exports = {
       },
       aboutMe: {
         type: Sequelize.STRING,
-        defaultValue: "미등록",
       },
       createdAt: {
         allowNull: false,

@@ -11,11 +11,11 @@ module.exports = {
       },
       userId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
       postId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
       createdAt: {
         allowNull: false,

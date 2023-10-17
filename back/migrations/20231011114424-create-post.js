@@ -11,11 +11,15 @@ module.exports = {
       },
       userId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+      },
+      title: {
+        allowNull: false,
+        type: Sequelize.STRING(30),
       },
       content: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(400),
       },
       image: {
         type: Sequelize.STRING,

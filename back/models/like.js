@@ -29,11 +29,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
       },
       postId: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
       },
       createdAt: {
         allowNull: false,

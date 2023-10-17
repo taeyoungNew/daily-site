@@ -11,12 +11,12 @@ module.exports = {
       },
       userOneId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
 
       userTwoId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
       createdAt: {
         allowNull: false,

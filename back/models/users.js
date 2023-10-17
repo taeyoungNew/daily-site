@@ -78,6 +78,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING(30),
       },
+      crrRefToken: {
+        type: DataTypes.STRING,
+      },
+      crrRefTokenExp: {
+        type: DataTypes.DATE,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
