@@ -16,7 +16,10 @@ class UserService {
     return result;
   };
   // 회원정보조회
-  // findUser = async (email) => {};
+  findUserInfo = async (id) => {
+    const result = await this.userRepositoy.findUserInfo(id);
+    return result;
+  };
   // 회원탈퇴
   withdrawal = async (id) => {
     await this.userRepositoy.withdrawal(id);

@@ -11,7 +11,7 @@ module.exports = {
       },
       chatId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
       chatContent: {
         allowNull: false,
@@ -19,7 +19,7 @@ module.exports = {
       },
       senderId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
       isCheck: {
         type: Sequelize.BOOLEAN,

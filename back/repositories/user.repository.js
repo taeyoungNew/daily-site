@@ -69,6 +69,15 @@ class UserService {
     return result;
   };
 
+  // 회원의 id, email 등 가져오기
+  findUserInfo = async (id) => {
+    const result = await Users.findOne({
+      attributes: ["id", "email"],
+      where: { id },
+    });
+    return result;
+  };
+
   // refresh token 정보저장
   saveRefToken = async (payload) => {
     const hashRefToken = payload.hashRefToken;
