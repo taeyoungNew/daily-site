@@ -6,8 +6,8 @@ class CommentRepository {
   postsComments = () => {};
   // 댓글생성
   commentCreate = async (payload) => {
-    const { id, postId, comtent } = payload;
-    await Comment.create({ userId: id, postId, comtent });
+    const { id, postId, content } = payload;
+    await Comment.create({ userId: id, postId, content });
   };
 
   // 댓글수정
