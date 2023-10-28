@@ -6,7 +6,7 @@ class PostController {
   getAllPosts = async (req, res) => {
     try {
       const allPosts = await this.postService.getAllPosts();
-      return res.status(200).json({ result: allPosts });
+      return res.status(200).json({ datas: allPosts });
     } catch (error) {
       return res.status(400).send({ message: error });
     }
@@ -16,7 +16,7 @@ class PostController {
     try {
       const { id } = res.locals.user;
       const allMyPosts = await this.postService.getAllPosts(id);
-      return res.status(200).json({ result: allMyPosts });
+      return res.status(200).json({ datas: allMyPosts });
     } catch (error) {
       return res.status(400).send({ message: error });
     }
