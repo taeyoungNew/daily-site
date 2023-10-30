@@ -12,9 +12,9 @@ const userController = new UserController();
 router.post("/", userController.signup);
 
 // 회원정보수정
-router.put("/user-modify", authMiddleware, userController.modify);
+router.put("/", authMiddleware, userController.modify);
 
 // 회원탈퇴
-router.delete("/user-withdrawal", authMiddleware, userController.withdrawal);
+router.delete("/", authMiddleware, userController.withdrawal);
 
 module.exports = router;

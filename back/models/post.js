@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // user - post 1대다
-      this.belongsTo(models.Users, {
+      this.belongsTo(models.User, {
         targetKey: "id",
         foreignKey: "userId",
       });
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "postId",
       });
       // post - like 다대다
-      this.belongsToMany(models.Users, {
+      this.belongsToMany(models.User, {
         through: "Like",
         sourceKey: "id",
         foreignKey: "postId",
