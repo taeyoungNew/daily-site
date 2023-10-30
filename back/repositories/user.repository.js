@@ -1,4 +1,4 @@
-const { Users, UserInfo } = require("../models");
+const { User, UserInfo } = require("../models");
 const { sequelize } = require("../models/index");
 // const { Transaction } = require("sequelize");
 class UserService {
@@ -23,7 +23,7 @@ class UserService {
     } = payload;
     // 트랜잭션으로 하자
     try {
-      const id = await Users.create(
+      const id = await User.create(
         {
           email,
           password,
@@ -54,7 +54,7 @@ class UserService {
   withdrawal = async (id) => {
     const t = await sequelize.transaction();
     try {
-      await Users.deleteOne({ where: { id } }, { transaction: t });
+      await User.deleteOne({ where: { id } }, { transaction: t });
       await UserInfo.deleteOne({ where: { userId: id } }, { transaction: t });
     } catch (error) {
       await t.rollback();
@@ -62,7 +62,7 @@ class UserService {
   };
   // 회원조회
   findUser = async (email) => {
-    const result = await Users.findOne({
+    const result = await User.findOne({
       attributes: ["id", "email", "password"],
       where: { email: email },
     });
@@ -71,7 +71,7 @@ class UserService {
 
   // 회원의 id, email 등 가져오기
   findUserInfo = async (id) => {
-    const result = await Users.findOne({
+    const result = await User.findOne({
       attributes: ["id", "email"],
       where: { id },
     });
