@@ -2,7 +2,7 @@ import axios from "axios";
 // 게시물 생성
 const createPost = (payload) => {
   axios
-    .post("http://0.0.0.0:3000/api/post/", payload)
+    .post("http ://0.0.0.0:3000/api/post/", payload)
     .then((res) => {
       console.log(res);
     })

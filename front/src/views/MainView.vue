@@ -3,6 +3,7 @@
     <ShareDaily></ShareDaily>
   </div>
 </template>
+http://localhost:8080/signin
 
 <script>
 import ShareDaily from "../components/common/ShareDaily.vue";
@@ -13,8 +14,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  height: 100vw;
-}
-</style>
+<style scoped></style>

@@ -1,5 +1,5 @@
 <template>
-  <nav class="header-container">
+  <!-- <nav class="header-container">
     <h1>로고</h1>
     <ul id="header-menu" class="header-menu">
       <li>
@@ -13,6 +13,19 @@
       </li>
       <li>
         <div class="user-icon"></div>
+      </li>
+    </ul>
+  </nav> -->
+  <nav class="header-container">
+    <router-link to="/">
+      <h1>로고</h1>
+    </router-link>
+    <ul id="non-login-menu" class="non-login-menu">
+      <li>
+        <router-link to="/signin">Sign in</router-link>
+      </li>
+      <li>
+        <router-link to="/signup">Sign up</router-link>
       </li>
     </ul>
   </nav>
@@ -32,13 +45,16 @@ export default {};
   padding-right: 30px;
   padding-left: 30px;
 }
-.header-menu {
+.header-menu,
+.non-login-menu {
   display: flex;
   list-style: none;
-  justify-content: space-between;
   width: 20%;
   padding: 0;
   align-items: center;
+}
+.header-menu {
+  justify-content: space-between;
 }
 
 .menu-icon,
@@ -53,5 +69,10 @@ export default {};
   border-radius: 70%;
   width: 37px;
   height: 37px;
+}
+
+.non-login-menu {
+  width: 10%;
+  justify-content: space-between;
 }
 </style>
