@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { createPost } from "../../api/postApi";
+import { createPost } from "../../api/post";
 export default {
   data() {
     return {

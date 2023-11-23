@@ -1,5 +1,5 @@
 <template>
-  <nav class="header-container">
+  <nav v-if="isSigngin" class="header-container">
     <h1>로고</h1>
     <ul id="header-menu" class="header-menu">
       <li>
@@ -16,10 +16,39 @@
       </li>
     </ul>
   </nav>
+  <nav v-else class="header-container">
+    <router-link to="/">
+      <h1>로고</h1>
+    </router-link>
+    <ul id="non-login-menu" class="non-login-menu">
+      <li>
+        <router-link to="/signin">Sign in</router-link>
+      </li>
+      <li>
+        <router-link to="/signup">Sign up</router-link>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isSigngin: false,
+    };
+  },
+  computed: {
+    isSignin() {
+      return this.$store.state.authStore.userEmail;
+    },
+  },
+  watch: {
+    isSignin() {
+      this.isSigngin = !this.isSigngin;
+    },
+  },
+};
 </script>
 
 <style scopd>
@@ -32,13 +61,16 @@ export default {};
   padding-right: 30px;
   padding-left: 30px;
 }
-.header-menu {
+.header-menu,
+.non-login-menu {
   display: flex;
   list-style: none;
-  justify-content: space-between;
   width: 20%;
   padding: 0;
   align-items: center;
+}
+.header-menu {
+  justify-content: space-between;
 }
 
 .menu-icon,
@@ -53,5 +85,10 @@ export default {};
   border-radius: 70%;
   width: 37px;
   height: 37px;
+}
+
+.non-login-menu {
+  width: 10%;
+  justify-content: space-between;
 }
 </style>

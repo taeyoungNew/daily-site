@@ -7,6 +7,25 @@ const routes = [
     name: "home",
     component: MainView,
   },
+  {
+    path: "/signin",
+    name: "signin",
+    component: () => import("@/views/SigninView.vue"),
+  },
+  {
+    path: "/signup",
+    name: "signup",
+    component: () => import("@/views/SignupView.vue"),
+  },
+  {
+    path: "/404",
+    name: "NotFoundPage",
+    component: () => import("@/views/NotFoundView.vue"),
+  },
+  {
+    path: "/:catchAll(.*)", // vue3에서는 catchAll을 따로 붙여줘야한다.
+    redirect: "/404",
+  },
 ];
 
 const router = createRouter({

@@ -13,12 +13,18 @@ export default {
 </script>
 
 <style>
+@import "../src/assets/css/reset.css";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   color: #2c3e50;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -30,10 +36,6 @@ body {
   border: 1px solid black;
 }
 
-nav {
-  /* padding: 30px; */
-}
-
 nav a {
   font-weight: bold;
   color: #2c3e50;
@@ -41,5 +43,9 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.container {
+  height: 90vh;
 }
 </style>
