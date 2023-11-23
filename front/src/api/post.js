@@ -16,15 +16,8 @@ const createPost = (payload) => {
 // 게시물 전체조회
 
 // 게시물 조회
-const getPosts = () => {
-  axios
-    .get("http://0.0.0.0:3000/api/post")
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+const getPosts = async () => {
+  return await axios.get("http://0.0.0.0:3000/api/post");
 };
 
 // 게시물 삭제

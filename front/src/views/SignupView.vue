@@ -1,10 +1,13 @@
 <template>
-  <div class="container"></div>
+  <div class="container">
+    <signup-component></signup-component>
+  </div>
 </template>
 
 <script>
+import SignupComponent from "@/components/SignupComponent.vue";
 export default {
-  components: {},
+  components: { SignupComponent },
 };
 </script>
 

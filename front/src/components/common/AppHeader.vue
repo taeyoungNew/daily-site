@@ -1,5 +1,5 @@
 <template>
-  <!-- <nav class="header-container">
+  <nav v-if="isSigngin" class="header-container">
     <h1>로고</h1>
     <ul id="header-menu" class="header-menu">
       <li>
@@ -15,8 +15,8 @@
         <div class="user-icon"></div>
       </li>
     </ul>
-  </nav> -->
-  <nav class="header-container">
+  </nav>
+  <nav v-else class="header-container">
     <router-link to="/">
       <h1>로고</h1>
     </router-link>
@@ -32,7 +32,23 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isSigngin: false,
+    };
+  },
+  computed: {
+    isSignin() {
+      return this.$store.state.authStore.userEmail;
+    },
+  },
+  watch: {
+    isSignin() {
+      this.isSigngin = !this.isSigngin;
+    },
+  },
+};
 </script>
 
 <style scopd>

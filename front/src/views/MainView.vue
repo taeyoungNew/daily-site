@@ -11,6 +11,12 @@ export default {
   components: {
     ShareDaily,
   },
+  methods: {
+    getPosts() {
+      // this.$store.
+    },
+  },
+  created() {},
 };
 </script>
 
