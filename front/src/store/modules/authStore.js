@@ -19,8 +19,8 @@ const authStore = {
     SIGNIN_USER(state, userData) {
       const { profileImg, name, hobby, address, mbti, aboutMe, age } =
         userData.UserInfo;
+      console.log("userData = ", userData);
       const email = userData.email;
-      console.log("email = ", userData.email, email);
       state.userEmail = email;
       state.userName = name;
       state.userProfileIme = profileImg;
@@ -38,6 +38,7 @@ const authStore = {
         const userData = await authApi
           .signin(payload)
           .then((res) => {
+            // console.log(res.)
             return res.data.data;
           })
           .catch((err) => {

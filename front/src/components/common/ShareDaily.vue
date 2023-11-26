@@ -1,7 +1,11 @@
 <template>
   <div class="share-container">
     <div class="input-box">
-      <input v-model="dailyText" placeholder="나의 일상 공유하기" type="text" />
+      <textarea
+        v-model="dailyText"
+        placeholder="나의 일상 공유하기"
+        type="text"
+      />
       <button @click="uploadDaliy">전송</button>
     </div>
     <div class="icon-box">
@@ -12,7 +16,7 @@
 </template>
 
 <script>
-import { createPost } from "../../api/post";
+import PostApi from "@/api/post";
 export default {
   data() {
     return {
@@ -20,9 +24,18 @@ export default {
     };
   },
   methods: {
-    uploadDaliy() {
-      console.log(this.dailyText);
-      createPost("하이");
+    async uploadDaliy() {
+      const payload = {
+        content: this.dailyText,
+        img: "",
+      };
+      try {
+        const postApi = new PostApi();
+        await postApi.createPost(payload);
+        alert("게시물이 생성되었습니다.");
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
     },
   },
 };
@@ -56,7 +69,10 @@ export default {
   /* border: 1px solid black; */
 }
 
-.input-box > input {
+.input-box > textarea {
+  resize: vertical;
+  height: 2em;
+  max-height: 15em;
   font-size: 17px;
   width: 90%;
   border: none;

@@ -8,13 +8,23 @@ import {
   faMessage,
   faSmile,
   faImage,
+  faThumbsUp,
+  faCommentDots,
 } from "@fortawesome/free-regular-svg-icons";
 
 import App from "./App.vue";
 import router from "./router";
 import store from "./store/index";
 
-library.add(faUsers, faBell, faMessage, faSmile, faImage);
+library.add(
+  faCommentDots,
+  faThumbsUp,
+  faUsers,
+  faBell,
+  faMessage,
+  faSmile,
+  faImage
+);
 
 createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)

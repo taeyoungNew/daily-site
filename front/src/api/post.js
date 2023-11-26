@@ -1,25 +1,12 @@
 import axios from "axios";
-// 게시물 생성
-const createPost = (payload) => {
-  axios
-    .post("http ://0.0.0.0:3000/api/post/", payload)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
+export default class PostApi {
+  loadPosts = async () => {
+    return await axios.get(`http://localhost:3000/api/post/`);
+  };
+
+  createPost = async (payload) => {
+    return await axios.post(`http://localhost:3000/api/post/`, payload, {
+      withCredentials: true, // axios는 withCredentials를 true로 하지 않으면 토큰을 저장안함
     });
-};
-
-// 게시물 수정
-
-// 게시물 전체조회
-
-// 게시물 조회
-const getPosts = async () => {
-  return await axios.get("http://0.0.0.0:3000/api/post");
-};
-
-// 게시물 삭제
-
-export { getPosts, createPost };
+  };
+}
