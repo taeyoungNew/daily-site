@@ -33,7 +33,6 @@ body {
   padding: 0;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid black;
 }
 
 nav a {
@@ -46,6 +45,6 @@ nav a.router-link-exact-active {
 }
 
 .container {
-  height: 90vh;
+  height: 100vh;
 }
 </style>

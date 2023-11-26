@@ -1,5 +1,3 @@
-import AuthApi from "@/api/auth";
-
 const userStore = {
   namespaced: true,
   state() {
@@ -9,15 +7,8 @@ const userStore = {
     };
   },
   getters: {},
-  mutations: {
-    SIGNIN_USER() {},
-  },
-  actions: {
-    async SIGNIN_USER(context, payload) {
-      console.log(context);
-      await AuthApi.signin(payload);
-    },
-  },
+  mutations: {},
+  actions: {},
 };
 
 export default userStore;

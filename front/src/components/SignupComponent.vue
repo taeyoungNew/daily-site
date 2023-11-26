@@ -1,27 +1,71 @@
 <template>
   <div class="signup-container">
     <h1 class="signup-title">회원가입</h1>
-    <form class="signup-form" action="">
-      <input placeholder="email" type="text" />
+    <form class="signup-form" @submit.prevent="signupForm" action="">
+      <input v-model="email" placeholder="email" type="text" />
       <label for="">*필수</label>
-      <input placeholder="password" type="text" />
+      <input v-model="password" placeholder="password" type="text" />
       <label for="">*필수</label>
-      <input placeholder="password confirm" type="text" />
+      <input
+        v-model="passwordConfirm"
+        placeholder="password confirm"
+        type="text"
+      />
       <label for="">*필수</label>
-      <input placeholder="nickname" type="text" />
+      <input v-model="name" placeholder="name" type="text" />
       <label for="">*필수</label>
-      <input placeholder="address" type="text" />
-      <input placeholder="hobby" type="text" />
-      <input placeholder="mbti" type="text" />
-      <input placeholder="food" type="text" />
-      <input placeholder="age" type="text" />
+      <input v-model="address" placeholder="address" type="text" />
+      <input v-model="hobby" placeholder="hobby" type="text" />
+      <input v-model="mbti" placeholder="mbti" type="text" />
+      <input v-model="food" placeholder="food" type="text" />
+      <input v-model="age" placeholder="age" type="text" />
       <input class="signup-btn" value="Sign up" type="submit" />
     </form>
   </div>
 </template>
 
 <script>
-export default {};
+import UserApi from "@/api/user";
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      profileImg: "",
+      name: "",
+      address: "",
+      hobby: "",
+      mbti: "",
+      food: "",
+      age: "",
+    };
+  },
+  methods: {
+    async signupForm() {
+      const userApi = new UserApi();
+      const payload = {
+        email: this.email,
+        password: this.password,
+        passwordConfirm: this.passwordConfirm,
+        profileImg: this.profileImg,
+        name: this.name,
+        address: this.address,
+        hobby: this.hobby,
+        mbti: this.mbti,
+        food: this.food,
+        age: this.age,
+      };
+      try {
+        const result = await userApi.signup(payload);
+        console.log(result);
+        this.$router.push("/signin");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
