@@ -5,6 +5,7 @@ const postStore = {
   state() {
     return {
       posts: "",
+      myPosts: "",
     };
   },
   getters: {},
@@ -12,13 +13,22 @@ const postStore = {
     LOAD_POSTS(state, payload) {
       state.posts = payload;
     },
+
+    GET_MY_POSTS(state, payload) {
+      state.myPosts = payload;
+    },
   },
   actions: {
-    async LOAD_POSTS(context, payload) {
+    async LOAD_POSTS(context) {
       const postApi = new PostApi();
-      const posts = await postApi.loadPosts(payload);
-      console.log("posts = ", posts);
+      const posts = await postApi.loadPosts();
       context.commit("LOAD_POSTS", posts.data);
+    },
+    async GET_MY_POSTS(context) {
+      const postApi = new PostApi();
+      const myPosts = await postApi.getMyPosts();
+      console.log(myPosts.data);
+      context.commit("GET_MY_POSTS", myPosts.data.datas);
     },
   },
 };

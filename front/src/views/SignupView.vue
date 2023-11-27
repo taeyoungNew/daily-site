@@ -11,4 +11,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@import url(../assets/css/container.css);
+</style>
