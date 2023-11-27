@@ -1,7 +1,8 @@
 const PostService = require("../services/post.service");
+const UserServie = require("../services/user.service");
 class PostController {
   postService = new PostService();
-
+  userService = new UserServie();
   // 전체 최신순으로 게시물 조회
   getAllPosts = async (req, res) => {
     try {
@@ -15,7 +16,8 @@ class PostController {
   getMyPosts = async (req, res) => {
     try {
       const { id } = res.locals.user;
-      const allMyPosts = await this.postService.getAllPosts(id);
+      const allMyPosts = await this.postService.getMyPosts(id);
+      console.log(" allMyPosts = ", allMyPosts);
       return res.status(200).json({ datas: allMyPosts });
     } catch (error) {
       return res.status(400).send({ message: error });
@@ -24,20 +26,19 @@ class PostController {
 
   // 게시물 생성
   postCreate = async (req, res) => {
+    console.log("포스트생성");
     try {
-      const { title, content, img } = req.body;
-      const { id } = res.locals.user;
-      // 제목과 내용이 공백이면 에러처리
-      if (!title) {
-        return res.status(412).send({ message: "제목을 입력해주세요" });
-      }
+      const { content, img } = req.body;
+      const user = res.locals.user;
+      const findUser = await this.userService.findUserInfo(user.id);
+
       if (!content) {
         return res.status(412).send({ message: "게시물내용을 입력해주세요." });
       }
-
       const payload = {
-        id,
-        title,
+        id: user.id,
+        userName: findUser.UserInfo.name,
+
         content,
         img,
       };
@@ -51,7 +52,7 @@ class PostController {
   // 게시물 수정
   postModify = async (req, res) => {
     try {
-      const { title, content, img } = req.body;
+      const { content, img } = req.body;
       const { postId } = req.params;
       const { id } = res.locals.user;
       // 자신의 게시물만 수정가능
@@ -66,10 +67,7 @@ class PostController {
           .status(412)
           .send({ message: "자신의 게시물만 수정할 수 있습니다." });
       }
-      // 제목과 내용이 공백이면 에러처리
-      if (!title) {
-        return res.status(412).send({ message: "수정할 제목을 입력해주세요" });
-      }
+
       if (!content) {
         return res
           .status(412)
@@ -78,7 +76,7 @@ class PostController {
 
       const payload = {
         postId,
-        title,
+
         content,
         img,
       };

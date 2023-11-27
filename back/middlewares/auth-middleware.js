@@ -18,7 +18,6 @@ module.exports = async (req, res, next) => {
   const decodeResult = verifyAccToken(token);
   try {
     if (decodeResult === "jwt exired") {
-      console.log("acc토큰 만료");
       // accToken이 만료되면
       // cookie에 있는 refresh토큰을 만료되었는지 확인
       const decodeRefToken = verifyRefToken(refToken);
@@ -29,7 +28,7 @@ module.exports = async (req, res, next) => {
       } else {
         // 만료가 되지 않았다면 access토큰 재발급하기
         // 회원정보가져오기
-        const user = await userService.findUserInfo(decodeRefToken.userId);
+        const user = await userService.findIdUser(decodeRefToken.userId);
         // acctoken 재발급
         const accToken = await accessToken(user.id, user.email);
         res.cookie("authorization", `Bearer ${accToken}`);
@@ -37,10 +36,9 @@ module.exports = async (req, res, next) => {
         next();
       }
     } else {
-      console.log("acc토큰 유효");
       // accToken이 만료되지 않았다면
       const id = decodeResult.userId;
-      const user = await userService.findUserInfo(id);
+      const user = await userService.findIdUser(id);
 
       if (!user) {
         return res
