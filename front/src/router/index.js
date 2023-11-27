@@ -18,6 +18,11 @@ const routes = [
     component: () => import("@/views/SignupView.vue"),
   },
   {
+    path: "/myPage",
+    name: "myPage",
+    component: () => import("@/views/MyPageView.vue"),
+  },
+  {
     path: "/404",
     name: "NotFoundPage",
     component: () => import("@/views/NotFoundView.vue"),

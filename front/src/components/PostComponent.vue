@@ -34,10 +34,8 @@ export default {
 .post-container {
   box-sizing: border-box;
   border: 0.5px solid gray;
-  width: 75%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 50px;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .post-profile-name-box {

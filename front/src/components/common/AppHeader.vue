@@ -12,7 +12,7 @@
         <font-awesome-icon class="menu-icon" :icon="['far', 'bell']" />
       </li>
       <li>
-        <div class="user-icon"></div>
+        <div class="user-icon" @click="myPage"></div>
       </li>
     </ul>
   </nav>
@@ -37,6 +37,11 @@ export default {
     return {
       isSigngin: false,
     };
+  },
+  methods: {
+    myPage() {
+      this.$router.push("/myPage");
+    },
   },
   computed: {
     isSignin() {

@@ -10,6 +10,7 @@ import {
   faImage,
   faThumbsUp,
   faCommentDots,
+  faPenToSquare,
 } from "@fortawesome/free-regular-svg-icons";
 
 import App from "./App.vue";
@@ -17,6 +18,7 @@ import router from "./router";
 import store from "./store/index";
 
 library.add(
+  faPenToSquare,
   faCommentDots,
   faThumbsUp,
   faUsers,

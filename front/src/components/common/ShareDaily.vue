@@ -45,10 +45,6 @@ export default {
 .share-container {
   box-sizing: border-box;
   border: 0.5px solid gray;
-  width: 75%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 50px;
 }
 
 .input-box,

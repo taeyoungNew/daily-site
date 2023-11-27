@@ -48,9 +48,5 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  border: 1px solid black;
-  height: 100vh;
-  overflow: scroll;
-}
+@import url(../assets/css/container.css);
 </style>
