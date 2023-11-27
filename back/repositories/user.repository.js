@@ -60,7 +60,7 @@ class UserService {
       await t.rollback();
     }
   };
-  // 회원조회
+  // email로 회원조회
   findUser = async (email) => {
     const result = await User.findOne({
       attributes: ["id", "email", "password"],
@@ -68,15 +68,46 @@ class UserService {
     });
     return result;
   };
+  // id로 회원조회
+  findIdUser = async (id) => {
+    const result = await User.findOne({
+      attributes: ["id", "email", "password"],
+      where: { id: id },
+    });
+    return result;
+  };
 
   // 회원의 id, email 등 가져오기
   findUserInfo = async (id) => {
     const result = await User.findOne({
-      attributes: ["id", "email"],
+      attributes: ["email"],
+      include: [
+        {
+          model: UserInfo,
+          attributes: [
+            "profileImg",
+            "name",
+            "hobby",
+            "address",
+            "mbti",
+            "food",
+            "age",
+            "aboutMe",
+          ],
+        },
+      ],
       where: { id },
     });
     return result;
   };
+
+  // // 회원의 모든 정보 조회
+  // getUserInfos = async(id) => {
+  //   const result = await UserInfo.findOne({
+  //     attributes: ["name", "hobby", ],
+  //     where: {id}
+  //   })
+  // }
 
   // refresh token 정보저장
   saveRefToken = async (payload) => {

@@ -3,34 +3,38 @@ const { Post } = require("../models");
 class PostRepository {
   getAllPosts = async () => {
     const allPosts = await Post.findAll({
-      attributes: ["id", "userId", "title", "content", "createdAt"],
+      attributes: ["id", "userId", "userName", "content", "createdAt"],
+      limit: 5,
       order: [["createdAt", "DESC"]],
     });
     return allPosts;
   };
   getMyPosts = async (userId) => {
-    const allMyPosts = await findAll({
-      attributes: ["id", "userId", "title", "content", "createdAt"],
-      where: { userId },
-      order: [["createdAt", "DESC"]],
-    });
-    return allMyPosts;
+    try {
+      const allMyPosts = await Post.findAll({
+        attributes: ["id", "userId", "userName", "content", "createdAt"],
+        where: { userId: userId },
+        order: [["createdAt", "DESC"]],
+      });
+      return allMyPosts;
+    } catch (error) {
+      throw new Error(error);
+    }
   };
   postCreate = async (payload) => {
-    const { id, title, content, img } = payload;
+    const { id, userName, content, img } = payload;
     await Post.create({
       userId: id,
-      title,
+      userName,
       content,
       img,
     });
   };
 
   postModify = async (payload) => {
-    const { postId, title, content, img } = payload;
+    const { postId, content, img } = payload;
     await Post.update(
       {
-        title,
         content,
         img,
       },

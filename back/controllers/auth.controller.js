@@ -12,23 +12,23 @@ class AuthController {
       // 회원정보가져오기
       const user = await this.userService.findUser(email);
       if (!user) {
-        return res.status(412).send({ message: "존재하지 않는 아이디입니다." });
+        return res.status(412).send("존재하지 않는 아이디입니다.");
       }
 
       // 패스워드 일치유무
       if (password !== user.password) {
-        return res
-          .status(412)
-          .send({ message: "패스워드가 일치하지않습니다." });
+        return res.status(412).send("패스워드가 일치하지않습니다.");
       }
+      const userInfo = await this.userService.findUserInfo(user.id);
       // accessToken refreshToken 생성
       const accToken = await this.accessToken(user.id, user.email);
       const refToken = await this.refreshToken(user.id);
-
       // 클라이언트에게 hashAccToken, hashRefToken보내기
       res.cookie("authorization", `Bearer ${accToken}`);
       res.cookie("refToken", `${refToken}`);
-      return res.status(200).send({ message: "로그인되었습니다." });
+      return res
+        .status(200)
+        .json({ message: "로그인되었습니다.", data: userInfo });
     } catch (error) {
       return res.status(400).send({ message: error.message });
     }

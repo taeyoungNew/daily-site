@@ -38,7 +38,7 @@ class AuthMiddleware {
         } else {
           // 만료가 되지 않았다면 access토큰 재발급하기
           // 회원정보가져오기
-          const user = await this.userService.findUser(email);
+          const user = await this.userService.findUser(id);
           // acctoken 재발급
           const accToken = await this.accessToken(user.id, user.email);
           res.cookie("authorization", `Bearer ${accToken}`);
