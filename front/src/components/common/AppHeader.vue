@@ -1,6 +1,8 @@
 <template>
-  <nav v-if="isSigngin" class="header-container">
-    <h1>로고</h1>
+  <nav v-if="isSignin" class="header-container">
+    <router-link class="logo" to="/">
+      <h1>일상스케치</h1>
+    </router-link>
     <ul id="header-menu" class="header-menu">
       <li>
         <font-awesome-icon class="menu-icon" :icon="['fas', 'users']" />
@@ -12,13 +14,15 @@
         <font-awesome-icon class="menu-icon" :icon="['far', 'bell']" />
       </li>
       <li>
-        <div class="user-icon" @click="myPage"></div>
+        <router-link to="/myPage">
+          <div class="user-icon" @click="myPage"></div>
+        </router-link>
       </li>
     </ul>
   </nav>
   <nav v-else class="header-container">
-    <router-link to="/">
-      <h1>로고</h1>
+    <router-link class="logo" to="/">
+      <h1>일상스케치</h1>
     </router-link>
     <ul id="non-login-menu" class="non-login-menu">
       <li>
@@ -35,7 +39,7 @@
 export default {
   data() {
     return {
-      isSigngin: false,
+      isLogin: false,
     };
   },
   methods: {
@@ -48,20 +52,17 @@ export default {
       return this.$store.state.authStore.userEmail;
     },
   },
-  watch: {
-    isSignin() {
-      this.isSigngin = !this.isSigngin;
-    },
-  },
 };
 </script>
 
 <style scopd>
 .header-container {
+  height: 55px;
   border: 1px solid black;
   box-sizing: border-box;
   padding: 5px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding-right: 30px;
   padding-left: 30px;
@@ -95,5 +96,13 @@ export default {
 .non-login-menu {
   width: 10%;
   justify-content: space-between;
+}
+.logo {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
