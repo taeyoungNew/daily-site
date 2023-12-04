@@ -26,7 +26,17 @@ const authStore = {
       userAge: getUserAge() || "",
     };
   },
-  getters: {},
+  getters: {
+    GET_USER_INFO(state) {
+      const payload = {
+        userAboutMe: state.userAboutMe,
+        userMbti: state.userMbti,
+        userHobby: state.userHobby,
+        userFood: state.userFood,
+      };
+      return payload;
+    },
+  },
   mutations: {
     SIGNIN_USER(state, userData) {
       const { profileImg, name, hobby, address, mbti, aboutMe, age } =

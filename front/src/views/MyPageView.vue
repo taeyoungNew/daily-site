@@ -77,6 +77,7 @@ export default {
 
 .item:nth-child(2) {
   grid-area: info;
+  max-width: 100%;
 }
 
 .item:nth-child(3) {
