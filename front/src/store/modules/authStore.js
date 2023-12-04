@@ -1,17 +1,29 @@
 import AuthApi from "@/api/auth";
-
+import {
+  saveUserInfo,
+  getUserEmail,
+  getUserName,
+  getUserMbti,
+  getUserAge,
+  getUserAboutMe,
+  getUserFood,
+  getUserHobby,
+  getUserProfileImg,
+  getUserAddress,
+} from "@/utils/cookies";
 const authStore = {
   namespaced: true,
   state() {
     return {
-      userEmail: "",
-      userName: "",
-      userProfileIme: "",
-      userHobby: "",
-      userAddress: "",
-      userMbti: "",
-      userAboutMe: "",
-      userAge: "",
+      userEmail: getUserEmail() || "",
+      userName: getUserName() || "",
+      userMbti: getUserMbti() || "",
+      userProfileIme: getUserProfileImg() || "",
+      userHobby: getUserHobby() || "",
+      userAddress: getUserAddress() || "",
+      userFood: getUserFood() || "",
+      userAboutMe: getUserAboutMe() || "",
+      userAge: getUserAge() || "",
     };
   },
   getters: {},
@@ -19,7 +31,6 @@ const authStore = {
     SIGNIN_USER(state, userData) {
       const { profileImg, name, hobby, address, mbti, aboutMe, age } =
         userData.UserInfo;
-      console.log("userData = ", userData);
       const email = userData.email;
       state.userEmail = email;
       state.userName = name;
@@ -39,12 +50,17 @@ const authStore = {
           .signin(payload)
           .then((res) => {
             // console.log(res.)
+
             return res.data.data;
           })
           .catch((err) => {
             console.log(err.response.data);
           });
+        console.log("userData = ", userData);
         context.commit("SIGNIN_USER", userData);
+        saveUserInfo(userData);
+        // 기타정보는 어떻게 할까?
+        // 로컬호스트로 저장을 하자
         // console.log(userData);
       } catch (error) {
         console.log(error.message);
