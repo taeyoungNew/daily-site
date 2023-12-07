@@ -27,7 +27,6 @@ const postStore = {
     async GET_MY_POSTS(context) {
       const postApi = new PostApi();
       const myPosts = await postApi.getMyPosts();
-      console.log(myPosts.data);
       context.commit("GET_MY_POSTS", myPosts.data.datas);
     },
   },
