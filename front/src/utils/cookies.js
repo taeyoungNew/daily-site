@@ -8,6 +8,19 @@ const saveUserInfo = (value) => {
   document.cookie = `user_email=${email}`;
 };
 
+const saveAboutMe = (value) => {
+  document.cookie = `my_aboutme=${value}`;
+};
+const saveMbti = (value) => {
+  document.cookie = `my_mbti=${value}`;
+};
+const saveFood = (value) => {
+  document.cookie = `my_food=${value}`;
+};
+const saveHobby = (value) => {
+  document.cookie = `my_hobby=${value}`;
+};
+
 const getUserEmail = () => {
   return document.cookie.replace(
     /(?:(?:^|.*;\s*)user_email\s*=\s*([^;]*).*$)|^.*$/,
@@ -22,9 +35,9 @@ const getUserName = () => {
   );
 };
 
-const getUserMbti = () => {
+const getMyMbti = () => {
   return document.cookie.replace(
-    /(?:(?:^|.*;\s*)mbti\s*=\s*([^;]*).*$)|^.*$/,
+    /(?:(?:^|.*;\s*)my_mbti\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
 };
@@ -35,23 +48,23 @@ const getUserAge = () => {
   );
 };
 
-const getUserAboutMe = () => {
+const getMyAboutMe = () => {
   return document.cookie.replace(
-    /(?:(?:^|.*;\s*)aboutMe\s*=\s*([^;]*).*$)|^.*$/,
+    /(?:(?:^|.*;\s*)my_about_me\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
 };
 
-const getUserFood = () => {
+const getMyFood = () => {
   return document.cookie.replace(
-    /(?:(?:^|.*;\s*)food\s*=\s*([^;]*).*$)|^.*$/,
+    /(?:(?:^|.*;\s*)my_food\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
 };
 
-const getUserHobby = () => {
+const getMyHobby = () => {
   return document.cookie.replace(
-    /(?:(?:^|.*;\s*)hobby\s*=\s*([^;]*).*$)|^.*$/,
+    /(?:(?:^|.*;\s*)my_hobby\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
 };
@@ -71,14 +84,18 @@ const getUserAddress = () => {
 };
 
 export {
+  saveAboutMe,
+  saveMbti,
+  saveFood,
+  saveHobby,
   saveUserInfo,
   getUserEmail,
   getUserName,
-  getUserMbti,
+  getMyMbti,
   getUserAge,
-  getUserAboutMe,
-  getUserFood,
-  getUserHobby,
+  getMyAboutMe,
+  getMyFood,
+  getMyHobby,
   getUserProfileImg,
   getUserAddress,
 };

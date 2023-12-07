@@ -62,7 +62,8 @@ export default {
 @import url(../assets/css/container.css);
 .my-page-container {
   display: grid;
-
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: max(300px);
   grid-template-areas:
     "profile profile profile"
     "info   daily-share daily-share"

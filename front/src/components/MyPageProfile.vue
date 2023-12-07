@@ -1,16 +1,22 @@
 <template>
   <div class="profile-box">
     <div class="user-profile-img"></div>
-    <div class="user-name">아무개</div>
+    <div class="user-name">{{ myName }}</div>
     <font-awesome-icon icon="fa-regular fa-pen-to-square " class="edit-icon" />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      myName: this.$store.state.authStore.userName,
+    };
+  },
+};
 </script>
 
-<style>
+<style scoped>
 .profile-box {
   padding: 25px;
   box-sizing: border-box;
