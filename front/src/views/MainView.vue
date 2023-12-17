@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" @scroll="notificationListScroll">
     <ShareDaily></ShareDaily>
     <PostComponent
       v-for="post in posts"
@@ -22,8 +22,16 @@ export default {
       posts: "",
     };
   },
+  mounted() {},
   methods: {
+    async notificationListScroll(e) {
+      const { scrollHeight, scrollTop, clientHeight } = e.target;
+      if (scrollTop + clientHeight === scrollHeight) {
+        await this.getPosts();
+      }
+    },
     async getPosts() {
+      console.log("getPosts");
       try {
         await this.$store.dispatch("postStore/LOAD_POSTS");
       } catch (error) {
@@ -41,7 +49,7 @@ export default {
   },
   watch: {
     storePosts(posts) {
-      this.posts = posts.datas;
+      this.posts = posts;
     },
   },
 };
