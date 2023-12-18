@@ -1,5 +1,5 @@
 <template>
-  <div class="my-page-container container">
+  <div class="my-page-container container" @scroll="notificationListScroll">
     <MyPageProfile class="item"></MyPageProfile>
     <user-info class="item"></user-info>
     <share-daily class="item"></share-daily>
@@ -34,9 +34,16 @@ export default {
     };
   },
   methods: {
+    async notificationListScroll(e) {
+      const { scrollHeight, scrollTop, clientHeight } = e.target;
+      if (scrollTop + clientHeight === scrollHeight) {
+        console.log("getMyPosts");
+        await this.getMyPosts();
+      }
+    },
     async getMyPosts() {
       try {
-        await this.$store.dispatch("postStore/GET_MY_POSTS");
+        await this.$store.dispatch("postStore/LOAD_MY_POSTS");
       } catch (error) {
         console.log(error);
       }
