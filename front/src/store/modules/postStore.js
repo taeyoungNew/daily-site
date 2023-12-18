@@ -12,7 +12,7 @@ const postStore = {
   mutations: {
     async LOAD_POSTS(state) {
       const postApi = new PostApi();
-      if (state.posts) {
+      if (state.posts !== "") {
         const lastPostId = state.posts[state.posts.length - 1].id;
         const posts = await postApi.loadPosts(lastPostId);
         console.log("posts.data.datas", posts.data);
@@ -22,22 +22,25 @@ const postStore = {
         state.posts = posts.data.datas;
       }
     },
-
-    GET_MY_POSTS(state, payload) {
-      state.myPosts = payload;
+    async LOAD_MY_POSTS(state) {
+      const postApi = new PostApi();
+      if (state.myPosts !== "") {
+        const lastPostId = state.myPosts[state.myPosts.length - 1].id;
+        const myPosts = await postApi.loadMyPosts(lastPostId);
+        state.myPosts = state.myPosts.concat(myPosts.data.datas);
+      } else {
+        const myPosts = await postApi.loadMyPosts();
+        state.myPosts = myPosts.data.datas;
+      }
     },
   },
   actions: {
     LOAD_POSTS: throttle(function (context) {
-      console.log("LOAD_POSTS");
       context.commit("LOAD_POSTS");
     }, 2000),
-
-    async GET_MY_POSTS(context) {
-      const postApi = new PostApi();
-      const myPosts = await postApi.getMyPosts();
-      context.commit("GET_MY_POSTS", myPosts.data.datas);
-    },
+    LOAD_MY_POSTS: throttle(function (context) {
+      context.commit("LOAD_MY_POSTS");
+    }, 2000),
   },
 };
 
