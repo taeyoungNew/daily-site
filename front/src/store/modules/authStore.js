@@ -73,7 +73,6 @@ const authStore = {
     },
 
     async LOAD_MY_INFO(state, payload) {
-      console.log("LOAD_MY_INFO");
       if (payload) {
         for (let key in payload["UserInfo"]) {
           if (key === "aboutMe") state.userAboutMe = payload["UserInfo"][key];
@@ -93,6 +92,7 @@ const authStore = {
           return res.data.data;
         })
         .catch((err) => {
+          alert(err.response.data);
           console.log(err.response.data);
         });
       context.commit("LOAD_MY_INFO", myInfo);
@@ -107,7 +107,7 @@ const authStore = {
             return res.data.data;
           })
           .catch((err) => {
-            console.log(err.response.data);
+            alert(err.response.data);
           });
         context.commit("SIGNIN_USER", userData);
         saveUserInfo(userData);
@@ -119,7 +119,7 @@ const authStore = {
     },
     async MODIFY_ABOUTME(context, param) {
       const authApi = new AuthApi();
-      console.log("getMyMbti()", getMyMbti());
+
       await authApi
         .modifyAboutMe(param)
         .then((res) => {
