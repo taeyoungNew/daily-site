@@ -17,6 +17,7 @@
     </div>
     <comment-box
       :id="`comments-${postData.id}`"
+      v-bind:postId="postData.id"
       style="display: block"
     ></comment-box>
   </div>
