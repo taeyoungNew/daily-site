@@ -15,7 +15,6 @@ const postStore = {
       if (state.posts !== "") {
         const lastPostId = state.posts[state.posts.length - 1].id;
         const posts = await postApi.loadPosts(lastPostId);
-        console.log("posts.data.datas", posts.data);
         state.posts = state.posts.concat(posts.data.datas);
       } else {
         const posts = await postApi.loadPosts();

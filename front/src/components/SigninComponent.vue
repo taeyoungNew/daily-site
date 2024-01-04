@@ -30,6 +30,7 @@ export default {
       try {
         await this.$store.dispatch("authStore/SIGNIN_USER", payload);
       } catch (error) {
+        alert(error);
         console.log(error);
       }
     },

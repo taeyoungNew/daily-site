@@ -37,7 +37,6 @@ export default {
     async notificationListScroll(e) {
       const { scrollHeight, scrollTop, clientHeight } = e.target;
       if (scrollTop + clientHeight === scrollHeight) {
-        console.log("getMyPosts");
         await this.getMyPosts();
       }
     },

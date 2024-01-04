@@ -9,15 +9,40 @@
     </div>
     <div class="post-footer">
       <font-awesome-icon class="like-btn icon" icon="fa-regular fa-thumbs-up" />
-      <font-awesome-icon class="icon" icon="fa-regular fa-comment-dots" />
+      <font-awesome-icon
+        @click="cmmntBtn"
+        class="comment-btn icon"
+        icon="fa-regular fa-comment-dots"
+      />
     </div>
+    <comment-box
+      :id="`comments-${postData.id}`"
+      v-bind:postId="postData.id"
+      style="display: block"
+    ></comment-box>
   </div>
 </template>
 
 <script>
+import CommentBox from "./CommentBox.vue";
 export default {
+  components: { CommentBox },
   data() {
     return {};
+  },
+  methods: {
+    async cmmntBtn(e) {
+      const postContainer = await e.currentTarget.parentElement.parentElement;
+      const postComments = document.getElementById(
+        `${postContainer.children[3].id}`
+      );
+      console.log("postComments = ", postComments);
+      if (postComments.style.display === "block") {
+        postComments.style.display = "none";
+      } else {
+        postComments.style.display = "block";
+      }
+    },
   },
   props: {
     postData: {
@@ -71,6 +96,10 @@ export default {
   font-size: 2em;
   display: flex;
   justify-content: flex-end;
+}
+
+.post-footer > div {
+  padding: 10px;
 }
 
 .like-btn {

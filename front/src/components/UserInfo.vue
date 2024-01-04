@@ -110,7 +110,6 @@ export default {
   },
   methods: {
     async loadMyInfo() {
-      console.log(this.aboutMe);
       try {
         await this.$store.dispatch("authStore/LOAD_MY_INFO");
       } catch (error) {

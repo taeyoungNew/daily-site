@@ -31,7 +31,6 @@ export default {
       }
     },
     async getPosts() {
-      console.log("getPosts");
       try {
         await this.$store.dispatch("postStore/LOAD_POSTS");
       } catch (error) {
