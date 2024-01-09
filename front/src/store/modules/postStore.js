@@ -12,7 +12,7 @@ const postStore = {
   mutations: {
     async LOAD_POSTS(state) {
       const postApi = new PostApi();
-      if (state.posts !== "") {
+      if (state.posts.length !== 0) {
         const lastPostId = state.posts[state.posts.length - 1].id;
         const posts = await postApi.loadPosts(lastPostId);
         state.posts = state.posts.concat(posts.data.datas);

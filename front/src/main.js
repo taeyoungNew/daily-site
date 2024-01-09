@@ -2,7 +2,13 @@ import { createApp } from "vue";
 // import VueCookie from "vue-cookie";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faUsers, faPen } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUsers,
+  faPen,
+  faEllipsisVertical,
+  faTrashCan,
+  faRectangleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faBell,
   faMessage,
@@ -26,7 +32,10 @@ library.add(
   faBell,
   faMessage,
   faSmile,
-  faImage
+  faImage,
+  faEllipsisVertical,
+  faTrashCan,
+  faRectangleXmark
 );
 
 createApp(App)

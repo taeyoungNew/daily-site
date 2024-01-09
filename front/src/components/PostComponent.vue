@@ -18,7 +18,8 @@
     <comment-box
       :id="`comments-${postData.id}`"
       v-bind:postId="postData.id"
-      style="display: block"
+      v-bind:comments="postData.Comments"
+      style="display: none"
     ></comment-box>
   </div>
 </template>
@@ -36,7 +37,6 @@ export default {
       const postComments = document.getElementById(
         `${postContainer.children[3].id}`
       );
-      console.log("postComments = ", postComments);
       if (postComments.style.display === "block") {
         postComments.style.display = "none";
       } else {
