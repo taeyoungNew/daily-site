@@ -57,6 +57,26 @@ const authStore = {
       state.userAboutMe = aboutMe;
       state.userAddress = address;
     },
+
+    async LOGOUT_USER(state) {
+      const authApi = new AuthApi();
+      try {
+        const result = await authApi.logout();
+        state.userEmail = "";
+        state.userName = "";
+        state.userMbti = "";
+        state.userProfileIme = "";
+        state.userHobby = "";
+        state.userAddress = "";
+        state.userFood = "";
+        state.userAboutMe = "";
+        state.userAge = "";
+        alert(result.data.message);
+      } catch (error) {
+        alert(error.response.data.errorMessage);
+      }
+    },
+
     async MODIFY_ABOUTME(state, param) {
       console.log("MODIFY_ABOUTME =", param);
       state.userAboutMe = param;
@@ -117,6 +137,11 @@ const authStore = {
         console.log(error.message);
       }
     },
+
+    async LOGOUT_USER(context) {
+      await context.commit("LOGOUT_USER");
+    },
+
     async MODIFY_ABOUTME(context, param) {
       const authApi = new AuthApi();
 

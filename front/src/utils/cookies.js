@@ -20,6 +20,11 @@ const saveHobby = (value) => {
   document.cookie = `my_hobby=${value}`;
 };
 
+const deleteCookies = () => {
+  const cookies = document.cookie.split("; ");
+  console.log("cookies = ", cookies);
+};
+
 const getUserEmail = () => {
   return document.cookie.replace(
     /(?:(?:^|.*;\s*)user_email\s*=\s*([^;]*).*$)|^.*$/,
@@ -83,6 +88,7 @@ const getUserAddress = () => {
 };
 
 export {
+  deleteCookies,
   saveAboutMe,
   saveMbti,
   saveFood,

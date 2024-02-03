@@ -5,7 +5,11 @@ export default class AuthApi {
       withCredentials: true, // axios는 withCredentials를 true로 하지 않으면 토큰을 저장안함
     });
   };
-
+  logout = async () => {
+    return await axios.delete("http://localhost:3000/api/auth/logout", {
+      withCredentials: true,
+    });
+  };
   loadMyInfo = async () => {
     return await axios.get(`http://localhost:3000/api/user/`, {
       withCredentials: true,

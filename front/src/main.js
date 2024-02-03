@@ -8,6 +8,7 @@ import {
   faEllipsisVertical,
   faTrashCan,
   faRectangleXmark,
+  faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faBell,
@@ -35,7 +36,8 @@ library.add(
   faImage,
   faEllipsisVertical,
   faTrashCan,
-  faRectangleXmark
+  faRectangleXmark,
+  faArrowRightFromBracket
 );
 
 createApp(App)
