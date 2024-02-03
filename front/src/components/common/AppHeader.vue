@@ -18,6 +18,13 @@
           <div class="user-icon" @click="myPage"></div>
         </router-link>
       </li>
+      <li>
+        <font-awesome-icon
+          @click="logout"
+          class="menu-icon logout-btn"
+          :icon="['fas', 'arrow-right-from-bracket']"
+        />
+      </li>
     </ul>
   </nav>
   <nav v-else class="header-container">
@@ -45,6 +52,9 @@ export default {
   methods: {
     myPage() {
       this.$router.push("/myPage");
+    },
+    async logout() {
+      await this.$store.dispatch("authStore/LOGOUT_USER");
     },
   },
   computed: {
@@ -91,6 +101,10 @@ export default {
   border-radius: 70%;
   width: 37px;
   height: 37px;
+}
+
+.logout-btn {
+  color: tomato;
 }
 
 .non-login-menu {

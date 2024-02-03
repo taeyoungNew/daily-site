@@ -10,7 +10,6 @@ export default class CommentApi {
     );
   };
   loadComments = async (postId) => {
-    console.log("loadComments = ", postId);
     return await axios.get(
       `http://localhost:3000/api/comment/post-comments/${postId}`
     );
