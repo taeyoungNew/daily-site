@@ -8,32 +8,49 @@
       <div class="post-content">{{ postData.content }}</div>
     </div>
     <div class="post-footer">
-      <font-awesome-icon class="like-btn icon" icon="fa-regular fa-thumbs-up" />
-      <font-awesome-icon
-        @click="cmmntBtn"
-        class="comment-btn icon"
-        icon="fa-regular fa-comment-dots"
-      />
+      <div>
+        <font-awesome-icon
+          @click="likePost(postData.id)"
+          class="like-btn icon"
+          icon="fa-regular fa-thumbs-up"
+        />
+        <span v-if="postData.likeCnt > 0">{{ postData.likeCnt }}</span>
+        <span v-else> {{ 0 }}</span>
+      </div>
+      <div>
+        <font-awesome-icon
+          @click="cmmntBtn($event, postData.id)"
+          class="comment-btn icon"
+          icon="fa-regular fa-comment-dots"
+        />
+        <span v-if="postData.commentCnt > 0">{{ postData.commentCnt }}</span>
+        <span v-else> {{ 0 }}</span>
+      </div>
     </div>
     <comment-box
       :id="`comments-${postData.id}`"
       v-bind:postId="postData.id"
-      v-bind:comments="postData.Comments"
-      style="display: none"
+      v-bind:comments="this.comments"
+      class="comment-box"
     ></comment-box>
   </div>
 </template>
 
 <script>
 import CommentBox from "./CommentBox.vue";
+import CommentApi from "../api/comment";
 export default {
   components: { CommentBox },
   data() {
-    return {};
+    return {
+      comments: [],
+    };
   },
   methods: {
-    async cmmntBtn(e) {
-      const postContainer = await e.currentTarget.parentElement.parentElement;
+    async cmmntBtn(e, postId) {
+      const commentApi = new CommentApi();
+      const postContainer = await e.currentTarget.parentElement.parentElement
+        .parentElement;
       const postComments = document.getElementById(
         `${postContainer.children[3].id}`
       );
@@ -42,6 +59,15 @@ export default {
       } else {
         postComments.style.display = "block";
       }
+      // 댓글 불러오기
+      const result = await commentApi.loadComments(postId);
+      console.log(result.data.datas);
+      this.comments = result.data.datas;
+    },
+
+    async likePost(param) {
+      const postId = param;
+      await this.$store.dispatch("postStore/LIKE_POST", postId);
     },
   },
   props: {
@@ -99,13 +125,22 @@ export default {
 }
 
 .post-footer > div {
-  padding: 10px;
+  padding: 1px;
 }
 
 .like-btn {
-  margin-right: 1em;
+  margin-right: 0.4em;
+}
+
+.comment-btn {
+  margin-right: 0.4em;
+  margin-left: 0.4em;
 }
 .icon {
   cursor: pointer;
+}
+
+.comment-box {
+  display: none;
 }
 </style>

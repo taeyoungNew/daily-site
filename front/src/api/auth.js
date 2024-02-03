@@ -16,7 +16,7 @@ export default class AuthApi {
       `http://localhost:3000/api/user/about-me`,
       { aboutMe }, // patch는 객체형태로 데이터를 보낸다.
       {
-        withCredentials: true, // axios는 withCredentials를 true로 하지 않으면 토큰을 저장안함
+        withCredentials: true,
       }
     );
   };
@@ -25,7 +25,7 @@ export default class AuthApi {
       `http://localhost:3000/api/user/mbti`,
       { mbti },
       {
-        withCredentials: true, // axios는 withCredentials를 true로 하지 않으면 토큰을 저장안함
+        withCredentials: true,
       }
     );
   };
@@ -34,7 +34,7 @@ export default class AuthApi {
       `http://localhost:3000/api/user/food`,
       { food },
       {
-        withCredentials: true, // axios는 withCredentials를 true로 하지 않으면 토큰을 저장안함
+        withCredentials: true,
       }
     );
   };
@@ -43,7 +43,7 @@ export default class AuthApi {
       `http://localhost:3000/api/user/hobby`,
       { hobby },
       {
-        withCredentials: true, // axios는 withCredentials를 true로 하지 않으면 토큰을 저장안함
+        withCredentials: true,
       }
     );
   };

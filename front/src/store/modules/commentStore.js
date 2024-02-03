@@ -37,13 +37,16 @@ const commentStore = {
     },
   },
   actions: {
-    async CREATE_COMMENT(context, payload) {
+    CREATE_COMMENT(context, payload) {
       context.commit("CREATE_COMMENT", payload);
     },
-    async MODIFY_COMMENT(context, payload) {
+    // LOAD_COMMENTS(context, payload) {
+    //   context.commit("LOAD_COMMENTS", payload);
+    // },
+    MODIFY_COMMENT(context, payload) {
       context.commit("MODIFY_COMMENT", payload);
     },
-    async DELETE_COMMENT(context, payload) {
+    DELETE_COMMENT(context, payload) {
       context.commit("DELETE_COMMENT", payload);
     },
   },
