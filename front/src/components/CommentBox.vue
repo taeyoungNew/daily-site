@@ -38,7 +38,7 @@
           <textarea
             ref="editCommentInput"
             class="edit-comment"
-            rows="1"
+            rows="2"
             name=""
             @input="resizeTextarea"
             v-model="editComment"
@@ -51,7 +51,7 @@
             />
             <font-awesome-icon
               class="edit-btn"
-              @click="modifyComment(comment.id)"
+              @click="modifyComment($event, comment.id)"
               icon="fa-solid fa-pen"
             />
           </div>
@@ -93,7 +93,6 @@ export default {
       const commentMenu = document.getElementById(
         `${commentContainer.children[3].id}`
       );
-      console.log(commentMenu.style.display);
       if (commentMenu.style.display === "block") {
         commentMenu.style.display = "none";
       } else {
@@ -117,7 +116,7 @@ export default {
       commentMenu.style.display = "none";
       if (textArea.style.display === "block") {
         textArea.style.display = "none";
-        crrCommentContent.style.display = "block";
+        crrCommentContent.style.display = "flex-end";
       } else {
         textArea.style.display = "block";
         crrCommentContent.style.display = "none";
@@ -125,13 +124,26 @@ export default {
     },
 
     // 입력한 수정댓글 서버로 보내기
-    async modifyComment(commentId) {
+    async modifyComment(e, commentId) {
+      console.log(e);
+      const commentBox = document.getElementById(
+        `${e.currentTarget.parentElement.parentElement.parentElement.id}`
+      );
+      const commentContent = document.getElementById(
+        `${commentBox.children[1].id}`
+      );
+      const textAreaBox = document.getElementById(
+        `${commentBox.children[2].id}`
+      );
       const payload = {
         postId: this.postId,
         commentId,
         content: this.editComment,
       };
+      this.commentContent = this.editComment;
       await this.$store.dispatch("commentStore/MODIFY_COMMENT", payload);
+      commentContent.style.display = "block";
+      textAreaBox.style.display = "none";
     },
 
     // 수정하는거 취소하기
@@ -160,7 +172,7 @@ export default {
       await this.$store.dispatch("commentStore/DELETE_COMMENT", payload);
     },
     resizeTextarea() {
-      this.$refs.editCommentInput[0].style.height = "2px";
+      this.$refs.editCommentInput[0].style.height = "1px";
       this.$refs.editCommentInput[0].style.height =
         this.$refs.editCommentInput[0].scrollHeight + "px";
     },
@@ -184,7 +196,6 @@ export default {
 .input-comment-box {
   display: flex;
   box-sizing: border-box;
-  /* align-items: flex-end; */
   justify-content: space-between;
 }
 
@@ -265,11 +276,9 @@ export default {
 }
 .comment-content {
   padding: 20px;
-  /* border: 1px solid black; */
 }
 
 .edit-commnt-box {
-  /* border: 1px solid black; */
   width: 95%;
   margin-left: auto;
   margin-right: auto;
@@ -282,16 +291,17 @@ export default {
   border-bottom: 1px solid gray;
   outline: none;
   box-sizing: border-box;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+
+  scrollbar-width: none;
 }
 
 .edit-comment::-webkit-scrollbar {
-  display: none; /* chrome */
+  display: none;
 }
 .edit-btn-box {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   padding: 5px;
 }
 .edit-btn,

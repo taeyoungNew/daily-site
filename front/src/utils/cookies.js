@@ -2,7 +2,6 @@ const saveUserInfo = (value) => {
   const userInfo = value.UserInfo;
   const email = value.email;
   for (let key in userInfo) {
-    console.log(key, userInfo[key]);
     document.cookie = `${key}=${userInfo[key]}`;
   }
   document.cookie = `user_email=${email}`;

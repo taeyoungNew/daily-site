@@ -9,10 +9,14 @@ export default class CommentApi {
       }
     );
   };
-
+  loadComments = async (postId) => {
+    console.log("loadComments = ", postId);
+    return await axios.get(
+      `http://localhost:3000/api/comment/post-comments/${postId}`
+    );
+  };
   modifyComment = async (payload) => {
     const { postId, commentId, content } = payload;
-    console.log(postId, commentId, content);
     return await axios.put(
       `http://localhost:3000/api/comment/${postId}/${commentId}`,
       { content },
