@@ -13,13 +13,12 @@ class CommentRepository {
   // 해당 게시물의 댓글들을 조회
   postsComments = async (postId) => {
     const comments = await Comment.findAll({ where: { postId: postId } });
-    console.log("comments", comments);
     return comments;
   };
   // 댓글생성
   commentCreate = async (payload) => {
-    const { id, postId, content } = payload;
-    await Comment.create({ userId: id, postId, content });
+    const { id, postId, content, name } = payload;
+    await Comment.create({ userId: id, postId, content, name });
   };
 
   // 댓글수정

@@ -24,11 +24,16 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: "id",
         foreignKey: "userId",
       });
+
+      this.hasMany(models.PostLike);
       // user - like 다대다
       this.belongsToMany(models.Post, {
-        through: "Like",
-        sourceKey: "id",
+        through: "PostLike",
         foreignKey: "userId",
+        as: "post",
+        sourceKey: "id",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       });
 
       // user - folloing
@@ -54,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userOneId",
         as: "userOne",
       });
+
       this.belongsToMany(models.User, {
         through: "Chat",
         targetKey: "id",

@@ -15,6 +15,7 @@ class CommentController {
   };
   // 해당 게시물의 댓글들을 조회
   postsComments = async (req, res) => {
+    console.log("postsComments");
     try {
       const { postId } = req.params;
       // 게시물이 있는지 확인
@@ -39,7 +40,7 @@ class CommentController {
     try {
       const { postId } = req.params;
       const { id } = res.locals.user;
-      const { content } = req.body;
+      const { content, name } = req.body;
       const getPost = await this.postService.getPostInfo(postId);
       if (!getPost) {
         return res
@@ -53,6 +54,7 @@ class CommentController {
         postId,
         id,
         content,
+        name,
       };
 
       await this.commentService.commentCreate(payload);

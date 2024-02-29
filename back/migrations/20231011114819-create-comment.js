@@ -5,9 +5,9 @@ module.exports = {
     await queryInterface.createTable("Comments", {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        type: Sequelize.INTEGER,
       },
       userId: {
         allowNull: false,
@@ -15,7 +15,11 @@ module.exports = {
       },
       postId: {
         allowNull: false,
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
+      },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       content: {
         allowNull: false,

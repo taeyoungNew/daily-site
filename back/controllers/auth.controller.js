@@ -19,7 +19,7 @@ class AuthController {
       if (password !== user.password) {
         return res.status(412).send("패스워드가 일치하지않습니다.");
       }
-      const userInfo = await this.userService.findUserInfo(user.id);
+      const userInfo = await this.userService.findMyInfo(user.id);
       // accessToken refreshToken 생성
       const accToken = await this.accessToken(user.id, user.email);
       const refToken = await this.refreshToken(user.id);
@@ -66,13 +66,16 @@ class AuthController {
   // 로그아웃
   logout = (req, res) => {
     try {
-      const { authorization } = req.cookies;
+      const cookies = req.cookies;
       // authorization가 없으면
-      if (!authorization) {
+      if (!cookies.authorization) {
         return res.status(401).send({ errorMessage: "로그인상태가 아닙니다." });
       }
-      // 클라이언트에 있는 jwt삭제
-      res.clearCookie("authorization");
+
+      // 쿠키에 있는 유저의 모든 정보 삭제
+      for (let prop in cookies) {
+        res.clearCookie(prop);
+      }
       return res.status(200).send({ message: "로그아웃되었습니다." });
     } catch (error) {
       return res.status(400).send({ message: "로그인상태가 아닙니다." });

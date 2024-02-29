@@ -19,11 +19,15 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: "id",
         foreignKey: "postId",
       });
+      this.hasMany(models.PostLike);
       // post - like 다대다
       this.belongsToMany(models.User, {
-        through: "Like",
-        sourceKey: "id",
+        through: "PostLike",
         foreignKey: "postId",
+        sourceKey: "id",
+        as: "user",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       });
     }
   }
@@ -32,8 +36,8 @@ module.exports = (sequelize, DataTypes) => {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
       },
       userId: {
         allowNull: false,

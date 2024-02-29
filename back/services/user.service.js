@@ -2,10 +2,34 @@ const UserRepositoy = require("../repositories/user.repository");
 class UserService {
   userRepositoy = new UserRepositoy();
 
+  // 유저 랜덤으로 불러오기
+  getRandomUsers = async () => {
+    const result = await this.userRepositoy.getRandomUsers();
+    return result;
+  };
+
   // 회원가입
   signup = async (payload) => {
     await this.userRepositoy.signup(payload);
   };
+  // 회원정보 수정
+  // 자기소개 수정
+  modifyAboutMe = async (payload) => {
+    await this.userRepositoy.modifyAboutMe(payload);
+  };
+  // 취미 수정
+  modifyHobby = async (payload) => {
+    await this.userRepositoy.modifyHobby(payload);
+  };
+  // 좋아하는음식 수정
+  modifyFood = async (payload) => {
+    await this.userRepositoy.modifyFood(payload);
+  };
+  // MBTI 수정
+  modifyMbti = async (payload) => {
+    await this.userRepositoy.modifyMbti(payload);
+  };
+
   // freshToken정보 저장
   saveRefToken = async (payload) => {
     await this.userRepositoy.saveRefToken(payload);
@@ -22,8 +46,8 @@ class UserService {
     return result;
   };
   // 회원정보상세조회
-  findUserInfo = async (id) => {
-    const result = await this.userRepositoy.findUserInfo(id);
+  findMyInfo = async (id) => {
+    const result = await this.userRepositoy.findMyInfo(id);
     return result;
   };
   // 회원탈퇴

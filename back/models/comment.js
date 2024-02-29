@@ -11,10 +11,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.User, {
         targetKey: "id",
+
         foreignKey: "userId",
       });
       this.belongsTo(models.Post, {
         targetKey: "id",
+        as: "comment",
         foreignKey: "postId",
       });
     }
@@ -34,6 +36,10 @@ module.exports = (sequelize, DataTypes) => {
       postId: {
         allowNull: false,
         type: DataTypes.UUID,
+      },
+      name: {
+        allowNull: false,
+        type: DataTypes.STRING,
       },
       content: {
         type: DataTypes.STRING,

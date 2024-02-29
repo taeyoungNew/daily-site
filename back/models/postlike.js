@@ -9,6 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.User, {
+        foreignKey: "userId",
+        targetKey: "id",
+      });
+      this.belongsTo(models.Post, {
+        foreignKey: "postId",
+        targetKey: "id",
+      });
+      // this.belongsTo(models.User);
+      // this.belongsTo(models.Post);
     }
   }
   PostLike.init(
@@ -19,14 +29,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      userId: {
-        allowNull: false,
-        type: DataTypes.UUID,
-      },
-      postId: {
-        allowNull: false,
-        type: DataTypes.UUID,
-      },
+      // userId: {
+      //   allowNull: false,
+      //   type: DataTypes.UUID,
+      //   references: {
+      //     model: "Users", // Users 모델을 참조
+      //     key: "id", // Users 모델의 userId를 참조
+      //   },
+      // },
+      // postId: {
+      //   allowNull: false,
+      //   type: DataTypes.INTEGER,
+      //   references: {
+      //     model: "Posts",
+      //     key: "id",
+      //   },
+      // },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
