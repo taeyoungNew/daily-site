@@ -23,6 +23,11 @@ const routes = [
     component: () => import("@/views/MyPageView.vue"),
   },
   {
+    path: "/usersPage",
+    name: "usersPage",
+    component: () => import("@/views/UsersView.vue"),
+  },
+  {
     path: "/404",
     name: "NotFoundPage",
     component: () => import("@/views/NotFoundView.vue"),

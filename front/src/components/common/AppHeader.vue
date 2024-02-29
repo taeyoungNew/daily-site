@@ -5,7 +5,9 @@
     </router-link>
     <ul id="header-menu" class="header-menu">
       <li>
-        <font-awesome-icon class="menu-icon" :icon="['fas', 'users']" />
+        <router-link to="/usersPage">
+          <font-awesome-icon class="menu-icon" :icon="['fas', 'users']" />
+        </router-link>
       </li>
       <li>
         <font-awesome-icon class="menu-icon" :icon="['far', 'message']" />
